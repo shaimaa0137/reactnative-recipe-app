@@ -16,7 +16,7 @@ import Categories from "../components/categories";
 import Recipes from "../components/recipes";
 
 export default function HomeScreen() {
-  const [activeCategory, setActiveCategory] = useState("Beef");
+  const [activeCategory, setActiveCategory] = useState(null);
 
   const [categories] = useState([
     {
@@ -55,10 +55,33 @@ export default function HomeScreen() {
       strCategoryThumb:
         "https://www.themealdb.com/images/category/breakfast.png",
     },
+    {
+      idCategory: "7",
+      strCategory: "Lamb",
+      strCategoryThumb:
+        "https://www.themealdb.com/images/category/lamb.png",
+    },
+    {
+      idCategory: "8",
+      strCategory: "Pork",
+      strCategoryThumb:
+        "https://www.themealdb.com/images/category/pork.png",
+    },
+    {
+      idCategory: "9",
+      strCategory: "Seafood",
+      strCategoryThumb:
+        "https://www.themealdb.com/images/category/seafood.png",
+    },
+    {
+      idCategory: "10",
+      strCategory: "Vegan",
+      strCategoryThumb:
+        "https://www.themealdb.com/images/category/vegan.png",
+    },
   ]);
 
   const [allFood] = useState([
-    // ==================== BEEF ====================
     {
       idFood: "1",
       idCategory: "1",
@@ -132,7 +155,6 @@ export default function HomeScreen() {
       difficulty: "Medium",
     },
 
-    // ==================== CHICKEN ====================
     {
       idFood: "4",
       idCategory: "2",
@@ -156,7 +178,6 @@ export default function HomeScreen() {
       difficulty: "Medium",
     },
 
-    // ==================== DESSERT ====================
     {
       idFood: "5",
       idCategory: "3",
@@ -180,7 +201,6 @@ export default function HomeScreen() {
       difficulty: "Easy",
     },
 
-    // ==================== PASTA ====================
     {
       idFood: "6",
       idCategory: "4",
@@ -204,7 +224,6 @@ export default function HomeScreen() {
       difficulty: "Easy",
     },
 
-    // ==================== VEGETARIAN ====================
     {
       idFood: "7",
       idCategory: "5",
@@ -228,7 +247,6 @@ export default function HomeScreen() {
       difficulty: "Easy",
     },
 
-    // ==================== BREAKFAST ====================
     {
       idFood: "8",
       idCategory: "6",
@@ -251,15 +269,63 @@ export default function HomeScreen() {
       calories: "300 Cal",
       difficulty: "Easy",
     },
+    {
+        idFood: "9",
+        idCategory: "9",
+        category: "Seafood",
+        recipeName: "Seafood Rice",
+        recipeInstructions:
+          "Cook the seafood with onions, garlic and spices. Add cooked rice and mix everything together. Serve hot.",
+        recipeImage:
+          "https://images.unsplash.com/photo-1534080564583-6be75777b214?q=80&w=1000&auto=format&fit=crop",
+        recipeId: "seafood_01",
+        recipeCategory: "Seafood",
+        ingredients: [
+          { ingredientName: "Mixed Seafood", measure: "400g" },
+          { ingredientName: "Rice", measure: "250g" },
+          { ingredientName: "Onion", measure: "1" },
+          { ingredientName: "Garlic", measure: "2 cloves" },
+        ],
+        preparationTime: "30 Mins",
+        servings: "03 Servings",
+        calories: "390 Cal",
+        difficulty: "Medium",
+      },
+      
+      {
+        idFood: "10",
+        idCategory: "10",
+        category: "Vegan",
+        recipeName: "Vegan Buddha Bowl",
+        recipeInstructions:
+          "Cook the vegetables and prepare the grains. Place everything in a bowl and serve with your favorite dressing.",
+        recipeImage:
+          "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=1000&auto=format&fit=crop",
+        recipeId: "vegan_01",
+        recipeCategory: "Vegan",
+        ingredients: [
+          { ingredientName: "Chickpeas", measure: "1 cup" },
+          { ingredientName: "Quinoa", measure: "1 cup" },
+          { ingredientName: "Avocado", measure: "1" },
+          { ingredientName: "Vegetables", measure: "2 cups" },
+        ],
+        preparationTime: "25 Mins",
+        servings: "02 Servings",
+        calories: "320 Cal",
+        difficulty: "Easy",
+      },
   ]);
 
   const handleChangeCategory = (category) => {
     setActiveCategory(category);
   };
 
-  const filteredfoods = allFood.filter(
-    (food) => food.category === activeCategory
-  );
+  const filteredfoods =
+    activeCategory === null
+      ? allFood
+      : allFood.filter(
+          (food) => food.category === activeCategory
+        );
 
   return (
     <View style={styles.container}>
@@ -269,7 +335,6 @@ export default function HomeScreen() {
         testID="scrollContainer"
         showsVerticalScrollIndicator={false}
       >
-        {/* Header */}
         <View
           testID="headerContainer"
           style={styles.headerContainer}
@@ -284,7 +349,6 @@ export default function HomeScreen() {
           <Text style={styles.headerText}>Hello, User!</Text>
         </View>
 
-        {/* Title */}
         <View
           testID="titleContainer"
           style={styles.titleContainer}
@@ -298,7 +362,6 @@ export default function HomeScreen() {
           </Text>
         </View>
 
-        {/* Categories */}
         <View
           testID="categoryList"
           style={styles.categoryList}
@@ -310,7 +373,6 @@ export default function HomeScreen() {
           />
         </View>
 
-        {/* Recipes */}
         <View
           testID="foodList"
           style={styles.foodList}
